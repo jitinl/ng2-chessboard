@@ -68,8 +68,8 @@ export class ChessboardComponent implements OnInit {
   }
 
   @Input()
-  set pieceTheme(value: any) {
-    this._pieceTheme = value instanceof Function ? value() : value;
+  set pieceTheme(value: string|((s: string)=>string)) {
+    this._pieceTheme = value;
     if(this.board) this.load();
     this.pieceThemeChange.emit(this._pieceTheme);
   }
@@ -107,7 +107,7 @@ export class ChessboardComponent implements OnInit {
   get showNotation():  Boolean { return this._showNotation;  }
   get draggable():     Boolean { return this._draggable;     }
   get dropOffBoard():  string  { return this._dropOffBoard;  }
-  get pieceTheme():    any     { return this._pieceTheme;    }
+  get pieceTheme():    string|((s: string)=>string)          { return this._pieceTheme;    }
   get moveSpeed():     any     { return this._moveSpeed;     }
   get snapbackSpeed(): any     { return this._snapbackSpeed; }
   get snapSpeed():     any     { return this._snapSpeed;     }
